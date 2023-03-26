@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Вход пользователя</title>
+    <link rel="stylesheet" href="page3_style.css">
+  </head>
+  <body>
+    
+  <header class="header">
+  <h1 class="header__title">Twitter</h1>
+  <nav class="header__nav">
+    <a href="#" class="header__nav-link">TWEETS</a>
+    <a href="page3.html" class="header__nav-link">LOGIN</a>
+    <a href="html.html" target="_blank" class="header__nav-link">REGISTER</a>
+  </nav>
+</header>
+
+
+    <form id="login-form">
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" required>
+      <input type="submit" value="Войти">
+    </form>
+    <script>
+      const loginForm = document.getElementById("login-form");
+
+loginForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  let users = localStorage.getItem("users");
+  if (users) {
+    users = JSON.parse(users);
+    const userData = users.find(user => user.email === email && user.password === password);
+    if (userData) {
+      localStorage.setItem("data", JSON.stringify(userData));
+      window.location.href = "page2.html";
+    } else {
+      alert("Неверный email или пароль");
+    }
+  } else {
+    alert("Неверный email или пароль");
+  }
+});
+
+    </script>
+  </body>
+</html>
